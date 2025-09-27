@@ -42,6 +42,13 @@ coverage/
 build/
 dist/
 
+# Keep essential React folders (src, public, etc.)
+!desktop-admin/src/
+!desktop-admin/public/
+!desktop-admin/package.json
+!desktop-admin/package-lock.json
+!desktop-admin/server.js
+
 # Environment variables
 .env
 .env.local
@@ -57,6 +64,14 @@ dist/
 .pub-cache/
 .pub/
 build/
+
+# Keep essential Flutter folders (lib, assets, test, etc.)
+!mobile-manager/lib/
+!mobile-manager/assets/
+!mobile-manager/test/
+!mobile-manager/pubspec.yaml
+!mobile-manager/pubspec.lock
+!mobile-manager/analysis_options.yaml
 
 # Symbolication related
 app.*.symbols
@@ -119,6 +134,12 @@ app.*.map.json
 # Composer
 vendor/
 composer.lock
+
+# Keep essential PHP folders (includes, public, assets, etc.)
+!web-ecommerce/includes/
+!web-ecommerce/public/
+!web-ecommerce/assets/
+!web-ecommerce/index.php
 composer.phar
 
 # Cache
@@ -132,6 +153,26 @@ temp/
 *.sqlite3
 *.db
 database.sqlite
+
+# Keep essential backend folders (controllers, models, routes, etc.)
+!backend/controllers/
+!backend/models/
+!backend/routes/
+!backend/middleware/
+!backend/config/
+!backend/migrations/
+!backend/assets/
+!backend/bin/
+!backend/public/
+!backend/app.js
+!backend/server.js
+!backend/package.json
+!backend/package-lock.json
+!backend/createAdminUser.js
+!backend/seedDatabase.js
+!backend/syncDatabase.js
+!backend/testModels.js
+!backend/env.example
 
 # ===== IDE / EDITORS =====
 # Visual Studio Code
