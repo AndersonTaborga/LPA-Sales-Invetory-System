@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .icon-preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .icon-size {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .icon-size h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .download-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .download-btn:hover {
+            background: #5a6fd8;
+        }
+        .instructions {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LPA Project - Icon Generator</h1>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Click "Generate Icons" to create all icon sizes</li>
+                <li>Right-click on each icon and "Save image as..." to download</li>
+                <li>Save the icons in the <code>public/</code> folder with the correct names</li>
+                <li>Or use the download buttons to save automatically</li>
+            </ol>
+        </div>
+
+        <button onclick="generateAllIcons()" style="padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-bottom: 20px;">
+            Generate Icons
+        </button>
+
+        <div class="icon-preview" id="iconPreview">
+            <!-- Icons will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        const svgContent = `<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="256" cy="256" r="240" fill="url(#bgGradient)" stroke="#5a6fd8" stroke-width="8"/>
+  
+  <g fill="url(#iconGradient)">
+    <rect x="140" y="140" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+    <rect x="240" y="140" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+    <rect x="340" y="140" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+    
+    <rect x="140" y="240" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+    <rect x="240" y="240" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+    <rect x="340" y="240" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+    
+    <rect x="140" y="340" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+    <rect x="240" y="340" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+    <rect x="340" y="340" width="80" height="80" rx="12" fill="white" opacity="0.95"/>
+  </g>
+  
+  <circle cx="256" cy="256" r="20" fill="#667eea"/>
+  <circle cx="256" cy="256" r="12" fill="white"/>
+  
+  <circle cx="180" cy="180" r="6" fill="#667eea"/>
+  <circle cx="332" cy="180" r="6" fill="#667eea"/>
+  <circle cx="180" cy="332" r="6" fill="#667eea"/>
+  <circle cx="332" cy="332" r="6" fill="#667eea"/>
+</svg>`;
+
+        const iconSizes = [
+            { name: 'favicon-16x16.png', size: 16 },
+            { name: 'favicon-32x32.png', size: 32 },
+            { name: 'apple-touch-icon.png', size: 180 },
+            { name: 'logo192.png', size: 192 },
+            { name: 'logo512.png', size: 512 }
+        ];
+
+        function generateIcon(size, filename) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                const img = new Image();
+                img.onload = function() {
+                    ctx.drawImage(img, 0, 0, size, size);
+                    resolve({ canvas, filename });
+                };
+
+                const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+                const url = URL.createObjectURL(blob);
+                img.src = url;
+            });
+        }
+
+        function downloadCanvas(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        async function generateAllIcons() {
+            const preview = document.getElementById('iconPreview');
+            preview.innerHTML = '';
+
+            for (const iconConfig of iconSizes) {
+                const { canvas, filename } = await generateIcon(iconConfig.size, iconConfig.name);
+                
+                const iconDiv = document.createElement('div');
+                iconDiv.className = 'icon-size';
+                iconDiv.innerHTML = `
+                    <h3>${iconConfig.size}x${iconConfig.size}</h3>
+                    <div>${canvas.outerHTML}</div>
+                    <button class="download-btn" onclick="downloadCanvas(this.previousElementSibling.querySelector('canvas'), '${filename}')">
+                        Download ${filename}
+                    </button>
+                `;
+                
+                preview.appendChild(iconDiv);
+            }
+
+            // Also generate favicon.ico (using 32x32 as base)
+            const { canvas } = await generateIcon(32, 'favicon.ico');
+            const iconDiv = document.createElement('div');
+            iconDiv.className = 'icon-size';
+            iconDiv.innerHTML = `
+                <h3>32x32 (ICO)</h3>
+                <div>${canvas.outerHTML}</div>
+                <button class="download-btn" onclick="downloadCanvas(this.previousElementSibling.querySelector('canvas'), 'favicon.ico')">
+                    Download favicon.ico
+                </button>
+            `;
+            preview.appendChild(iconDiv);
+        }
+
+        // Auto-generate on page load
+        window.onload = generateAllIcons;
+    </script>
+</body>
+</html> 
