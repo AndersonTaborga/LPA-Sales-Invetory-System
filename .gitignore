@@ -1,29 +1,15 @@
+# ===========================================
+# LPA Sales Inventory System - Main .gitignore
+# ===========================================
+
+# ===== NODE.JS / JAVASCRIPT =====
 # Dependencies
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Database
-*.sqlite
-*.db
-database.sqlite
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
+yarn.lock
 
 # Runtime data
 pids/
@@ -34,19 +20,13 @@ pids/
 # Coverage directory used by tools like istanbul
 coverage/
 *.lcov
-
-# nyc test coverage
 .nyc_output
 
-# Dependency directories
-node_modules/
-jspm_packages/
+# ESLint cache
+.eslintcache
 
 # Optional npm cache directory
 .npm
-
-# Optional eslint cache
-.eslintcache
 
 # Optional REPL history
 .node_repl_history
@@ -57,51 +37,53 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# ===== REACT / FRONTEND =====
+# Production build
+build/
+dist/
+
+# Environment variables
 .env
-.env.test
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-.parcel-cache
-
-# next.js build output
-.next
-
-# nuxt.js build output
-.nuxt
-
-# vuepress build output
-.vuepress/dist
-
-# Serverless directories
-.serverless/
-
-# FuseBox cache
-.fusebox/
-
-# DynamoDB Local files
-.dynamodb/
-
-# TernJS port file
-.tern-port
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
-# Flutter/Dart
+# ===== FLUTTER / DART =====
+# Flutter/Dart/Pub related
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-.packages
 .pub-cache/
 .pub/
 build/
-flutter_*.png
-linked_*.ds
-unlinked.ds
-unlinked_spec.ds
 
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Flutter specific
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+
+# ===== ANDROID =====
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
@@ -113,6 +95,7 @@ unlinked_spec.ds
 **/android/key.properties
 *.jks
 
+# ===== iOS / XCODE =====
 # iOS/XCode related
 **/ios/**/*.mode1v3
 **/ios/**/*.mode2v3
@@ -130,33 +113,10 @@ unlinked_spec.ds
 **/ios/**/profile
 **/ios/**/xcuserdata
 **/ios/.generated/
-**/ios/Flutter/App.framework
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Flutter.podspec
-**/ios/Flutter/Generated.xcconfig
-**/ios/Flutter/ephemeral/
-**/ios/Flutter/app.flx
-**/ios/Flutter/app.zip
-**/ios/Flutter/flutter_assets/
-**/ios/Flutter/flutter_export_environment.sh
-**/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
-# Web related
-lib/generated_plugin_registrant.dart
-
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-
-# PHP
+# ===== PHP =====
+# Composer
 vendor/
 composer.lock
 composer.phar
@@ -166,39 +126,137 @@ cache/
 tmp/
 temp/
 
-# IDE
+# ===== DATABASE =====
+# SQLite databases
+*.sqlite
+*.sqlite3
+*.db
+database.sqlite
+
+# ===== IDE / EDITORS =====
+# Visual Studio Code
 .vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ IDEA
 .idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
 *.swp
 *.swo
 *~
 
-# OS generated files
+# ===== OPERATING SYSTEM =====
+# macOS
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
+.AppleDouble
+.LSOverride
 
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===== LOGS =====
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ===== TEMPORARY FILES =====
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+
+# ===== TESTING =====
+# Test coverage
+coverage/
+.nyc_output/
+.coverage
+htmlcov/
+
+# ===== BUILD ARTIFACTS =====
 # Build outputs
 build/
 dist/
 out/
+target/
 
-# Test coverage
-coverage/
-.nyc_output/
+# ===== SECURITY =====
+# Environment variables
+.env
+.env.*
+!.env.example
 
-# Temporary files
-*.tmp
-*.temp
+# ===== PROJECT SPECIFIC =====
+# LPA specific files
+backend/database.sqlite
+backend/node_modules/
+desktop-admin/node_modules/
+desktop-admin/build/
+mobile-manager/build/
+mobile-manager/.dart_tool/
+mobile-manager/.packages
+mobile-manager/.pub-cache/
+mobile-manager/.pub/
+
+# Remove duplicate web-ecommerce in backend
+backend/web-ecommerce/
+
+# ===== MISC =====
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
 
 # Backup files
 *.bak
 *.backup
 *.old
+*.orig
 
 # System files
 *.pid
@@ -255,86 +313,19 @@ pids/
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# React build
-desktop-admin/build/
+# ===== WEB SPECIFIC =====
+# Web related
+lib/generated_plugin_registrant.dart
 
-# Flutter build
-mobile-manager/build/
-mobile-manager/.dart_tool/
-mobile-manager/.packages
-mobile-manager/.pub-cache/
-mobile-manager/.pub/
-mobile-manager/flutter_*.png
-mobile-manager/linked_*.ds
-mobile-manager/unlinked.ds
-mobile-manager/unlinked_spec.ds
-
-# Mobile specific
-mobile-manager/**/android/**/gradle-wrapper.jar
-mobile-manager/**/android/.gradle
-mobile-manager/**/android/captures/
-mobile-manager/**/android/gradlew
-mobile-manager/**/android/gradlew.bat
-mobile-manager/**/android/local.properties
-mobile-manager/**/android/**/GeneratedPluginRegistrant.java
-mobile-manager/**/android/key.properties
-mobile-manager/*.jks
-
-mobile-manager/**/ios/**/*.mode1v3
-mobile-manager/**/ios/**/*.mode2v3
-mobile-manager/**/ios/**/*.moved-aside
-mobile-manager/**/ios/**/*.pbxuser
-mobile-manager/**/ios/**/*.perspectivev3
-mobile-manager/**/ios/**/*sync/
-mobile-manager/**/ios/**/.sconsign.dblite
-mobile-manager/**/ios/**/.tags*
-mobile-manager/**/ios/**/.vagrant/
-mobile-manager/**/ios/**/DerivedData/
-mobile-manager/**/ios/**/Icon?
-mobile-manager/**/ios/**/Pods/
-mobile-manager/**/ios/**/.symlinks/
-mobile-manager/**/ios/**/profile
-mobile-manager/**/ios/**/xcuserdata
-mobile-manager/**/ios/.generated/
-mobile-manager/**/ios/Flutter/App.framework
-mobile-manager/**/ios/Flutter/Flutter.framework
-mobile-manager/**/ios/Flutter/Flutter.podspec
-mobile-manager/**/ios/Flutter/Generated.xcconfig
-mobile-manager/**/ios/Flutter/ephemeral/
-mobile-manager/**/ios/Flutter/app.flx
-mobile-manager/**/ios/Flutter/app.zip
-mobile-manager/**/ios/Flutter/flutter_assets/
-mobile-manager/**/ios/Flutter/flutter_export_environment.sh
-mobile-manager/**/ios/ServiceDefinitions.json
-mobile-manager/**/ios/Runner/GeneratedPluginRegistrant.*
-
-# Web e-commerce specific
-web-ecommerce/vendor/
-web-ecommerce/composer.lock
-web-ecommerce/composer.phar
-web-ecommerce/cache/
-web-ecommerce/tmp/
-web-ecommerce/temp/
-
-# Backend specific
-backend/logs/
-backend/uploads/
-backend/temp/
-
-# Desktop admin specific
-desktop-admin/build/
-desktop-admin/.env.local
-desktop-admin/.env.development.local
-desktop-admin/.env.test.local
-desktop-admin/.env.production.local
-
-# Documentation
+# ===== DOCUMENTATION =====
+# Documentation build
 docs/_build/
 docs/.doctrees/
 
-# Jupyter Notebook
+# ===== JUPYTER NOTEBOOK =====
 .ipynb_checkpoints
 
+# ===== PYTHON =====
 # pyenv
 .python-version
 
@@ -348,9 +339,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -390,7 +379,6 @@ coverage.xml
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 
